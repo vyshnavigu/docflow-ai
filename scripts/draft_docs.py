@@ -13,7 +13,7 @@ SPEC_FILE = ROOT / "spec" / "openapi.yaml"
 RULES_FILE = ROOT / "config" / "drafting-rules.md"
 OUTPUT_FILE = ROOT / "drafts" / "FLOW-101-draft.md"
 
-MODEL = "llama-3.3-70b-versatile"
+MODEL = "openai/gpt-oss-120b"
 
 
 def read_file(path):
