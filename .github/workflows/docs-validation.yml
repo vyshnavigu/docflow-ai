@@ -60,3 +60,8 @@ jobs:
 
           print("Documentation content checks passed.")
           PY
+          
+      - name: Check documentation drift
+        run: |
+          git diff --exit-code -- docs/generated-api.md
+
