@@ -1,0 +1,77 @@
+
+openapi: 3.0.3
+
+info:
+  title: FlowOps Automation API
+  version: 1.0.0
+  description: |
+    The FlowOps API allows users to start
+    automation jobs and check their status.
+
+servers:
+  - url: https://api.flowops.example/v1
+
+paths:
+  /jobs:
+    post:
+      summary: Start an automation job
+      operationId: createJob
+      description: |
+        Starts an automation job using the
+        specified workflow.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - workflowId
+              properties:
+                workflowId:
+                  type: string
+                  example: nightly-transactions
+      responses:
+        '202':
+          description: Job accepted for processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+
+  /jobs/{jobId}:
+    get:
+      summary: Get automation job status
+      operationId: getJobStatus
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Job status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '404':
+          description: Job not found
+
+components:
+  schemas:
+    Job:
+      type: object
+      properties:
+        jobId:
+          type: string
+          example: job-1001
+        status:
+          type: string
+          enum:
+            - pending
+            - running
+            - completed
+            - failed
+          example: running
