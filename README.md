@@ -104,25 +104,56 @@ I then developed a Python quality checker to identify selected problems before h
 
 ## Evaluation Results
 
-The automated checker was tested with two controlled examples:
+I tested the automated documentation checker using two controlled samples:
 
-- A baseline AI-generated draft containing known problems.
-- A clean documentation sample without the configured violations.
+| Test | Purpose | Expected Result | Actual Result |
+|---|---|---|---|
+| Known-problem baseline | Verify that the checker identifies configured documentation violations | Fail | Passed the negative test by correctly rejecting the sample |
+| Clean documentation fixture | Verify that the checker accepts content without the configured violations | Pass | Passed |
 
-GitHub Actions successfully completed the evaluation workflow.
+Both tests completed successfully in the GitHub Actions evaluation workflow.
 
-The checker correctly rejected the known problematic draft and accepted the clean sample.
+### AI-Generated Draft Review
 
-These tests verify the configured checks. They do not establish the complete technical accuracy of every generated document.
+During testing, the AI-generated draft introduced information that was not supported by the source requirements, including authentication details and behaviour for an endpoint that had not been implemented.
+
+I reviewed the draft and ran the automated checker. The latest generated draft still contained four flagged issues and did not pass validation.
+
+This confirmed that the checker could identify some configured documentation problems. However, it does not verify every technical statement or guarantee that generated documentation is accurate.
 
 ## Human Review and Publication
 
-AI-generated documentation is not automatically approved for publication.
+AI-generated documentation is treated as a draft, not as approved content.
 
-The technical writer must verify technical accuracy, review unsupported claims, and confirm that the content is ready for its intended audience.
+Before publication, the technical writer must:
+
+1. Compare the draft against the approved API specification and source requirements.
+2. Identify unsupported statements, assumed behaviour, and incomplete information.
+3. Verify endpoint details, request and response examples, and error-handling instructions.
+4. Review the content for clarity, consistency, and the intended audience.
+5. Confirm that the documentation is ready for publication.
 
 The repository includes a review checklist to support this process.
 
+The checklist was added through a pull request with passing automated checks and self-review. It has not undergone independent technical approval.
+
 ## Current Limitations
 
-- The API specification# docflow-ai
+DocFlow AI is a personal proof of concept developed using a fictional automation API.
+
+- The OpenAPI specification describes only the implemented sample contract. The proposed cancellation endpoint is not part of the approved specification.
+- The automated checker identifies a defined set of documentation violations. It does not perform complete factual verification.
+- The evaluation workflow uses controlled fixtures. It does not establish the reliability of AI-generated documentation across different APIs or projects.
+- The latest AI-generated draft still requires correction and review.
+- The workflow does not automatically create pull requests, approve documentation, or publish AI-generated drafts.
+- The project has not been tested or reviewed in a production environment.
+
+## Next Steps
+
+Future improvements could include:
+
+- Expanding the validation rules to cover additional unsupported claims and documentation inconsistencies.
+- Evaluating generated drafts against a larger set of test cases.
+- Comparing drafts with approved OpenAPI specifications and requirements.
+- Introducing an independent technical review stage.
+- Exploring automated pull request creation while retaining human approval before publication.
