@@ -72,3 +72,8 @@ jobs:
               "was rejected."
           )
           PY
+          
+      - name: Evaluate clean documentation
+        run: |
+          python scripts/check_draft.py \
+            evaluations/fixtures/clean-draft.md
