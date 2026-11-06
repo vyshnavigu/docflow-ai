@@ -70,3 +70,90 @@ product documentation until the required review is complete.
 
 Drafts containing unverified behavior must remain separate
 from published documentation.
+
+## API Accuracy Rules
+
+The OpenAPI specification is the source of truth for
+the API operations currently documented.
+
+A Jira ticket may describe a proposed feature, but it
+does not confirm that the feature is implemented.
+
+When preparing documentation:
+
+1. Do not generate request examples unless the request
+   structure is defined in the source documents.
+
+2. Do not generate response examples unless the response
+   fields and their values are supported by the source.
+
+3. Do not assume that an API requires authentication,
+   authorization headers, or a particular request body.
+
+4. Do not introduce additional job states, error
+   conditions, or system behavior without supporting
+   information.
+
+5. Do not recommend procedures that depend on
+   functionality that has not been confirmed.
+
+6. When the source does not provide enough information,
+   identify what needs to be verified.
+
+7. Clearly separate proposed functionality from
+   implemented functionality.
+
+8. Do not present an unverified API operation as
+   available for customer use.
+
+## Source Verification
+
+Before preparing the draft, compare the Jira ticket
+with the OpenAPI specification.
+
+For each API operation, identify:
+
+- Whether the operation exists in the specification.
+- Which request parameters are defined.
+- Which response codes are supported.
+- Which response fields are defined.
+- Which details are missing or require confirmation.
+
+Do not fill missing information using assumptions
+about common API design practices.
+
+## Writing Style
+
+Use clear and direct language.
+
+Explain the purpose of a feature before providing
+technical details.
+
+Use practical examples when they are supported by
+the source documents.
+
+Avoid unnecessary technical terminology.
+
+Do not use em dashes. Use commas, periods, or separate
+sentences where appropriate.
+
+Use correct grammar, punctuation, and sentence structure.
+
+Do not repeat the same information unnecessarily.
+
+## Draft Review Requirements
+
+Before returning the draft:
+
+1. Check every API example against the source.
+2. Remove unsupported request and response examples.
+3. Identify any statements that require confirmation.
+4. Check that proposed features are clearly labelled.
+5. Review terminology and writing style.
+6. Add an Items Requiring Verification section.
+
+If the API operation is not implemented, prepare
+a proposed documentation draft for internal review.
+
+Do not present the draft as approved documentation.
+
