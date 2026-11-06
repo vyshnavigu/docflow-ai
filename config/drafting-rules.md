@@ -157,3 +157,34 @@ a proposed documentation draft for internal review.
 
 Do not present the draft as approved documentation.
 
+## Final Accuracy and Style Checks
+
+Before returning a documentation draft:
+
+1. Review each statement about product behavior.
+   If the behavior is not supported by the source
+   documents, remove it or identify it as an item
+   requiring verification.
+
+2. Do not recommend monitoring or verification
+   procedures unless the API specification supports
+   the procedure and the expected outcome.
+
+3. Do not assume that cancellation introduces a new
+   job status or that a running job can be interrupted.
+
+4. Do not use the em dash character (—) anywhere in
+   the generated documentation, including headings,
+   tables, and verification items.
+
+5. Check the complete draft for unsupported examples
+   and statements before returning it.
+
+6. Clearly distinguish information defined in the
+   OpenAPI specification from proposed requirements
+   described in Jira tickets.
+
+7. Do not describe a proposed feature as available
+   for customer use.
+
+
