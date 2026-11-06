@@ -16,7 +16,8 @@ automation jobs and check their status.
 Start an automation job
 
 Starts an automation job using the
-specified workflow.
+specified workflow. The job is queued
+for processing after the request is accepted.
 
 ### Request Body
 
