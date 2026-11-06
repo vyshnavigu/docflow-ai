@@ -18,10 +18,15 @@ def check_draft(path):
             "Missing human review status."
         )
 
-    # Check the writing style.
+    # Check for dash characters used as separators.
     if "\u2014" in text:
         findings.append(
             "Em dash found in documentation."
+        )
+
+    if "\u2013" in text:
+        findings.append(
+            "En dash found. Review punctuation and writing style."
         )
 
     # Check for executable examples of the proposed endpoint.
