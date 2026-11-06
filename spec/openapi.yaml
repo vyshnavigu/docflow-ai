@@ -18,7 +18,8 @@ paths:
       operationId: createJob
       description: |
         Starts an automation job using the
-        specified workflow.
+        specified workflow. The job is queued
+        for processing after the request is accepted.
       requestBody:
         required: true
         content:
