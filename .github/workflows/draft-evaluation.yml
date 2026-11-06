@@ -1,0 +1,74 @@
+
+name: AI Draft Evaluation
+
+on:
+  push:
+    paths:
+      - 'scripts/check_draft.py'
+      - 'evaluations/**'
+      - '.github/workflows/draft-evaluation.yml'
+  pull_request:
+    paths:
+      - 'scripts/check_draft.py'
+      - 'evaluations/**'
+      - '.github/workflows/draft-evaluation.yml'
+  workflow_dispatch:
+
+jobs:
+  evaluate-draft:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify checker syntax
+        run: |
+          python -m py_compile scripts/check_draft.py
+
+      - name: Evaluate known failing draft
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess
+          import sys
+
+          draft = Path(
+              "evaluations/baseline/FLOW-101-baseline.md"
+          )
+
+          if not draft.exists():
+              raise SystemExit(
+                  f"Evaluation file not found: {draft}"
+              )
+
+          result = subprocess.run(
+              [
+                  sys.executable,
+                  "scripts/check_draft.py",
+                  str(draft)
+              ],
+              capture_output=True,
+              text=True
+          )
+
+          print(result.stdout)
+
+          if result.stderr:
+              print(result.stderr)
+
+          if result.returncode != 1:
+              raise SystemExit(
+                  "Expected the baseline draft to fail validation."
+              )
+
+          print(
+              "Evaluation passed: known failing draft "
+              "was rejected."
+          )
+          PY
